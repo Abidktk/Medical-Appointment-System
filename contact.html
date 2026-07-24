@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact MediCare+ - Get in touch with our medical team, send inquiries, or locate our healthcare centers.">
+    <title>Contact Us | MediCare+ Medical System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .contact-header {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .info-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .form-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="navbar">
+      <nav class="navbar" aria-label="Main Navigation">
+        <div class="logo">
+          <a href="index.html">MediCare+</a>
+        </div>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="doctors.html">Doctors</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-outline" id="loginBtn">Login</a>
+          <a href="register.html" class="btn btn-outline" id="registerBtn">Register</a>
+          <div id="userMenuDropdown" class="user-dropdown-container hidden">
+            <button id="userBadgeBtn" class="user-badge-btn">
+                <i class="fa-solid fa-circle-user" style="font-size: 1.2rem; color: var(--primary-color);"></i>
+                <span id="navUserName">User</span>
+                <span id="navUserRole" class="role-badge">PATIENT</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+            </button>
+            <div id="dropdownMenu" class="dropdown-menu">
+                <a href="dashboard.html" id="dashboardNavLink"><i class="fa-solid fa-gauge"></i> My Dashboard</a>
+                <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+        <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+        <section class="contact-header">
+            <div class="container">
+                <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 10px;">Contact Us</h1>
+                <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">
+                    We are here to assist you with your health inquiries, feedback, and appointment assistance.
+                </p>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="contact-grid">
+
+                <div class="info-card">
+                    <h3 style="font-size: 1.25rem; color: var(--dark-color); margin-bottom: 24px;">Get In Touch</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <strong style="color: var(--dark-color); display: block;">Hospital Address</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">123 Healthcare Boulevard, Medical District, City Center</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <strong style="color: var(--dark-color); display: block;">Phone Numbers</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">+92 (300) 123-4567<br>+92 (800) 987-6543 (Helpline)</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <strong style="color: var(--dark-color); display: block;">Email Inquiries</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">info@medicare.com<br>support@medicare.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h3 style="font-size: 1.4rem; color: var(--dark-color); margin-bottom: 8px;">Send Us a Message</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Fill out the form below and our support team will get back to you shortly.</p>
+
+                    <form id="contactForm" novalidate>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="cName">Your Name</label>
+                                <input type="text" id="cName" class="form-control" placeholder="Your Name" required data-label="Your Name">
+                            </div>
+                            <div class="form-group"
+                                <label for="cEmail">Email Address</label>
+                                <input type="email" id="cEmail" class="form-control" placeholder="Email Address" required data-label="Email Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cSubject">Subject</label>
+                            <input type="text" id="cSubject" class="form-control" placeholder="e.g. Inquiry about consultation" required data-label="Subject">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cMessage">Message</label>
+                            <textarea id="cMessage" class="form-control" rows="5" placeholder="Write your message here..." required data-label="Message"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-bottom" style="text-align: center;">
+            <p>&copy; 2026 MediCare+ Medical Appointment System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = e.target;
+            if (!FormValidator.validateForm(form)) return;
+
+            const name = document.getElementById('cName').value.trim();
+            const email = document.getElementById('cEmail').value.trim();
+            const subject = document.getElementById('cSubject').value.trim();
+            const message = document.getElementById('cMessage').value.trim();
+
+            StorageManager.saveMessage({ name, email, subject, message });
+
+            showToast('Thank you! Your message has been sent to our admin team.', 'success');
+            form.reset();
+        });
+    </script>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <div class="mbn-inner">
+            <a href="index.html" class="mbn-tab" id="mbn-home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="about.html" class="mbn-tab" id="mbn-about"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+            <a href="appointment.html" class="mbn-tab mbn-book" id="mbn-book"><i class="fa-solid fa-calendar-plus"></i><span>Book</span></a>
+            <a href="doctors.html" class="mbn-tab" id="mbn-doctors"><i class="fa-solid fa-user-doctor"></i><span>Doctors</span></a>
+            <a href="contact.html" class="mbn-tab active" id="mbn-contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </div>
+    </nav>
+</body>
+</html>

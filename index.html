@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="MediCare+ Modern Medical Appointment System. Find experienced doctors and book appointments online within minutes.">
+    <title>MediCare+ | Trusted Healthcare For Your Family</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="navbar">
+        <nav class="navbar" aria-label="Main Navigation">
+
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html" aria-label="MediCare+ Homepage">MediCare+</a>
+            </div>
+
+            <!-- Navigation -->
+            <ul class="nav-links" role="list">
+                <li><a href="index.html" class="active" aria-current="page" aria-label="Home Page">Home</a></li>
+                <li><a href="about.html" aria-label="About Us Page">About</a></li>
+                <li><a href="doctors.html" aria-label="Find Doctors Page">Doctors</a></li>
+                <li><a href="appointment.html" aria-label="Book Appointment Page">Appointment</a></li>
+                <li><a href="contact.html" aria-label="Contact Us Page">Contact</a></li>
+            </ul>
+
+            <!-- Buttons -->
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline" id="loginBtn" aria-label="Login to User Account">Login</a>
+                <a href="register.html" class="btn btn-outline" id="registerBtn"
+                    aria-label="Register New Account">Register</a>
+                <div id="userMenuDropdown" class="user-dropdown-container hidden">
+                    <button id="userBadgeBtn" class="user-badge-btn">
+                        <i class="fa-solid fa-circle-user" style="font-size: 1.2rem; color: var(--primary-color);"></i>
+                        <span id="navUserName">User</span>
+                        <span id="navUserRole" class="role-badge">PATIENT</span>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+                    </button>
+                    <div id="dropdownMenu" class="dropdown-menu">
+                        <a href="dashboard.html" id="dashboardNavLink"><i class="fa-solid fa-gauge"></i> My
+                            Dashboard</a>
+                        <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+                <a href="appointment.html" class="btn btn-primary" aria-label="Book Medical Appointment">
+                    Book Appointment
+                </a>
+            </div>
+
+            <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero-section" aria-label="Hero Showcase">
+            <div class="hero-bg-shapes" aria-hidden="true">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+            </div>
+
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <i class="fa-solid fa-shield-heart" aria-hidden="true"></i> Trusted Healthcare For Your Family
+                    </div>
+                    <h1 class="hero-title">
+                        Find Experienced Doctors & Book Appointments <span class="text-gradient">Online Within
+                            Minutes</span>
+                    </h1>
+                    <p class="hero-description">
+                        Access qualified medical specialists, schedule clinic or online consultation visits, and manage
+                        your family health seamlessly.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="appointment.html" class="btn btn-primary btn-lg"
+                            aria-label="Book Medical Appointment Now">
+                            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Book Appointment
+                        </a>
+                        <a href="doctors.html" class="btn btn-secondary btn-lg" aria-label="Find Experienced Doctor">
+                            <i class="fa-solid fa-user-doctor" aria-hidden="true"></i> Find Doctor
+                        </a>
+                    </div>
+
+                    <!-- Hero Stats Counter -->
+                    <div class="hero-stats" aria-label="Healthcare System Statistics">
+                        <div class="stat-item">
+                            <span class="stat-number">250+</span>
+                            <span class="stat-label">Doctors</span>
+                        </div>
+                        <div class="stat-divider" aria-hidden="true"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">15K+</span>
+                            <span class="stat-label">Patients</span>
+                        </div>
+                        <div class="stat-divider" aria-hidden="true"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600"
+                            alt="Professional Doctor" class="hero-main-img">
+
+                        <!-- Floating Badge Cards -->
+                        <div class="floating-card card-rating glassmorphism">
+                            <div class="icon-box star-icon" aria-hidden="true">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="card-info">
+                                <strong>4.9 / 5.0 Rating</strong>
+                                <span>Over 15,000+ Happy Patients</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-card card-appointment glassmorphism">
+                            <div class="icon-box check-icon" aria-hidden="true">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div class="card-info">
+                                <strong>Instant Confirmation</strong>
+                                <span>24/7 Online Booking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Appointment Search Bar -->
+        <section class="quick-booking-section" aria-label="Quick Doctor Search">
+            <div class="container">
+                <div class="booking-widget-card">
+                    <div class="widget-header">
+                        <h3><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Quick Appointment Search
+                        </h3>
+                        <p>Find experienced doctors and reserve your slot instantly</p>
+                    </div>
+                    <form class="quick-search-form" id="quickSearchForm" action="doctors.html" method="GET"
+                        aria-label="Quick Doctor Search Form">
+                        <div class="form-group-inline">
+                            <label for="searchDepartment"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+                                Department</label>
+                            <select id="searchDepartment" name="department" aria-label="Select Medical Department">
+                                <option value="">Select Department</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Dental">Dental</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Orthopedic">Orthopedic</option>
+                                <option value="Eye Care">Eye Care</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-inline">
+                            <label for="searchDoctorSelect"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
+                                Doctor</label>
+                            <select id="searchDoctorSelect" name="name" aria-label="Select Doctor">
+                                <option value="">Select Doctor</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-inline">
+                            <label for="searchDate"><i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                                Date</label>
+                            <input type="date" id="searchDate" name="date" aria-label="Preferred Appointment Date">
+                        </div>
+
+                        <div class="form-group-inline form-btn">
+                            <label>&nbsp;</label>
+                            <button type="submit" class="btn btn-primary btn-block" aria-label="Submit Doctor Search">
+                                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search Doctor
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Medical Services Section -->
+        <section class="section services-section" id="services" aria-label="Our Medical Services">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">OUR SERVICES</span>
+                    <h2 class="section-title">Our Medical Services</h2>
+                    <p class="section-desc">Quality healthcare services from experienced specialists.</p>
+                </div>
+
+                <div class="grid grid-3 services-grid">
+                    <!-- Cardiology Card -->
+                    <div class="service-card">
+                        <div class="service-icon cardiology" aria-hidden="true">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h3>Cardiology</h3>
+                        <p>Heart Care</p>
+                        <a href="doctors.html?department=Cardiology" class="link-btn"
+                            aria-label="Learn more about Cardiology Services">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- Dental Card -->
+                    <div class="service-card">
+                        <div class="service-icon dental" aria-hidden="true">
+                            <i class="fa-solid fa-tooth"></i>
+                        </div>
+                        <h3>Dental</h3>
+                        <p>Dental Care</p>
+                        <a href="doctors.html?department=Dental" class="link-btn"
+                            aria-label="Learn more about Dental Services">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- Neurology Card -->
+                    <div class="service-card">
+                        <div class="service-icon neurology" aria-hidden="true">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3>Neurology</h3>
+                        <p>Brain Specialists</p>
+                        <a href="doctors.html?department=Neurology" class="link-btn"
+                            aria-label="Learn more about Neurology Services">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- Pediatrics Card -->
+                    <div class="service-card">
+                        <div class="service-icon pediatrics" aria-hidden="true">
+                            <i class="fa-solid fa-baby"></i>
+                        </div>
+                        <h3>Pediatrics</h3>
+                        <p>Child Care</p>
+                        <a href="doctors.html?department=Pediatrics" class="link-btn"
+                            aria-label="Learn more about Pediatrics Services">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- Orthopedic Card -->
+                    <div class="service-card">
+                        <div class="service-icon orthopedic" aria-hidden="true">
+                            <i class="fa-solid fa-bone"></i>
+                        </div>
+                        <h3>Orthopedic</h3>
+                        <p>Bone Care</p>
+                        <a href="doctors.html?department=Orthopedic" class="link-btn"
+                            aria-label="Learn more about Orthopedic Services">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <!-- Eye Care Card -->
+                    <div class="service-card">
+                        <div class="service-icon eyecare" aria-hidden="true">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3>Eye Care</h3>
+                        <p>Vision Care</p>
+                        <a href="doctors.html?department=Eye%20Care" class="link-btn"
+                            aria-label="Learn more about Eye Care Services">
+                            Learn More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Meet Our Specialists Section -->
+        <section class="section doctors-section" id="doctors" aria-label="Meet Our Specialists">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle">Meet Our Specialists</span>
+                    <h2 class="section-title">Experienced Doctors You Can Trust</h2>
+                </div>
+
+                <div class="grid grid-4 doctors-grid">
+                    <!-- Doctor 1 -->
+                    <div class="doctor-card">
+                        <div class="doctor-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400"
+                                alt="Dr. Ahmed Khan">
+                            <span class="badge-available">
+                                <i class="fa-solid fa-circle"></i> Available Today
+                            </span>
+                        </div>
+                        <div class="doctor-info">
+                            <span class="doctor-dept">Cardiology</span>
+                            <h3>Dr. Ahmed Khan</h3>
+                            <div class="doctor-rating" aria-label="Rating 4.9 out of 5 stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="doctor-meta">
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-briefcase-medical"></i>
+                                    <span>10 Years Experience</span>
+                                </div>
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>Consultation Fee: Rs. 2000</span>
+                                </div>
+                            </div>
+                            <div class="doctor-card-actions">
+                                <a href="doctors.html?id=1" class="btn btn-outline btn-sm">View Profile</a>
+                                <a href="appointment.html?doctor=1" class="btn btn-primary btn-sm">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 2 -->
+                    <div class="doctor-card">
+                        <div class="doctor-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400"
+                                alt="Dr. Sarah Ali">
+                            <span class="badge-available">
+                                <i class="fa-solid fa-circle"></i> Available Today
+                            </span>
+                        </div>
+                        <div class="doctor-info">
+                            <span class="doctor-dept">Dental</span>
+                            <h3>Dr. Sarah Ali</h3>
+                            <div class="doctor-rating" aria-label="Rating 4.8 out of 5 stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="doctor-meta">
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-briefcase-medical"></i>
+                                    <span>8 Years Experience</span>
+                                </div>
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>Consultation Fee: Rs. 1500</span>
+                                </div>
+                            </div>
+                            <div class="doctor-card-actions">
+                                <a href="doctors.html?id=2" class="btn btn-outline btn-sm">View Profile</a>
+                                <a href="appointment.html?doctor=2" class="btn btn-primary btn-sm">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 3 -->
+                    <div class="doctor-card">
+                        <div class="doctor-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400"
+                                alt="Dr. Hassan Raza">
+                            <span class="badge-available">
+                                <i class="fa-solid fa-circle"></i> Available Today
+                            </span>
+                        </div>
+                        <div class="doctor-info">
+                            <span class="doctor-dept">Neurology</span>
+                            <h3>Dr. Hassan Raza</h3>
+                            <div class="doctor-rating" aria-label="Rating 5.0 out of 5 stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <div class="doctor-meta">
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-briefcase-medical"></i>
+                                    <span>12 Years Experience</span>
+                                </div>
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>Consultation Fee: Rs. 2500</span>
+                                </div>
+                            </div>
+                            <div class="doctor-card-actions">
+                                <a href="doctors.html?id=3" class="btn btn-outline btn-sm">View Profile</a>
+                                <a href="appointment.html?doctor=3" class="btn btn-primary btn-sm">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 4 -->
+                    <div class="doctor-card">
+                        <div class="doctor-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?auto=format&fit=crop&q=80&w=400"
+                                alt="Dr. Fatima Noor">
+                            <span class="badge-available">
+                                <i class="fa-solid fa-circle"></i> Available Today
+                            </span>
+                        </div>
+                        <div class="doctor-info">
+                            <span class="doctor-dept">Pediatrics</span>
+                            <h3>Dr. Fatima Noor</h3>
+                            <div class="doctor-rating" aria-label="Rating 4.9 out of 5 stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="doctor-meta">
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-briefcase-medical"></i>
+                                    <span>9 Years Experience</span>
+                                </div>
+                                <div class="doctor-meta-item">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>Consultation Fee: Rs. 1800</span>
+                                </div>
+                            </div>
+                            <div class="doctor-card-actions">
+                                <a href="doctors.html?id=4" class="btn btn-outline btn-sm">View Profile</a>
+                                <a href="appointment.html?doctor=4" class="btn btn-primary btn-sm">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="section why-choose-us" id="why-choose-us" aria-label="Why Choose Us">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Why Choose Us</span>
+                    <h2>Why Patients Trust MediCare+</h2>
+                    <p>
+                        We combine experienced doctors, modern technology,
+                        and compassionate care to provide the best medical services.
+                    </p>
+                </div>
+
+                <div class="why-grid">
+                    <!-- Left Side: Feature Cards -->
+                    <div class="why-content">
+                        <!-- Card 1 -->
+                        <div class="feature-card-clean">
+                            <div class="feature-icon-wrapper">
+                                <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Modern Equipment</h3>
+                                <p>Advanced diagnostic and treatment technology.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="feature-card-clean">
+                            <div class="feature-icon-wrapper">
+                                <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Experienced Doctors</h3>
+                                <p>Highly qualified specialists with years of experience.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="feature-card-clean">
+                            <div class="feature-icon-wrapper">
+                                <i class="fa-solid fa-truck-medical" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-info">
+                                <h3>24/7 Emergency</h3>
+                                <p>Emergency medical services available all day.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="feature-card-clean">
+                            <div class="feature-icon-wrapper">
+                                <i class="fa-solid fa-laptop-medical" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Online Appointment</h3>
+                                <p>Book appointments anytime from anywhere.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="feature-card-clean">
+                            <div class="feature-icon-wrapper">
+                                <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Affordable Treatment</h3>
+                                <p>Quality healthcare at reasonable consultation fees.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="feature-card-clean">
+                            <div class="feature-icon-wrapper">
+                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-info">
+                                <h3>Secure Records</h3>
+                                <p>Your medical information is protected and confidential.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Hospital Image -->
+                    <div class="why-image">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800" alt="MediCare+ Hospital Exterior Building">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             Hospital Statistics Section
+        =========================================== -->
+        <section class="statistics-section" aria-label="Hospital Statistics">
+            <div class="container">
+                <div class="grid grid-4 statistics-grid">
+                    <!-- Stat Card 1 -->
+                    <div class="stat-card-clean">
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-users" aria-hidden="true"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-count" data-target="15000" data-suffix="+" data-format="comma">15,000+</h3>
+                            <p class="stat-name">Happy Patients</p>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card 2 -->
+                    <div class="stat-card-clean">
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-count" data-target="250" data-suffix="+">250+</h3>
+                            <p class="stat-name">Expert Doctors</p>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card 3 -->
+                    <div class="stat-card-clean">
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-award" aria-hidden="true"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-count" data-target="15" data-suffix="+">15+</h3>
+                            <p class="stat-name">Years Experience</p>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card 4 -->
+                    <div class="stat-card-clean">
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-face-smile" aria-hidden="true"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-count" data-target="99" data-suffix="%">99%</h3>
+                            <p class="stat-name">Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <div class="mbn-inner">
+            <a href="index.html" class="mbn-tab" id="mbn-home">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="about.html" class="mbn-tab" id="mbn-about">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>About</span>
+            </a>
+            <a href="appointment.html" class="mbn-tab mbn-book" id="mbn-book">
+                <i class="fa-solid fa-calendar-plus"></i>
+                <span>Book</span>
+            </a>
+            <a href="doctors.html" class="mbn-tab" id="mbn-doctors">
+                <i class="fa-solid fa-user-doctor"></i>
+                <span>Doctors</span>
+            </a>
+            <a href="contact.html" class="mbn-tab" id="mbn-contact">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- JavaScript Files -->
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Set active bottom nav tab
+        (function () {
+            const page = window.location.pathname.split('/').pop() || 'index.html';
+            const map = { 'index.html': 'mbn-home', 'about.html': 'mbn-about', 'appointment.html': 'mbn-book', 'doctors.html': 'mbn-doctors', 'contact.html': 'mbn-contact' };
+            const activeId = map[page];
+            if (activeId) {
+                const el = document.getElementById(activeId);
+                if (el) el.classList.add('active');
+            }
+        })();
+    </script>
+</body>
+
+</html>

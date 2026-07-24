@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MediCare+ Admin Dashboard - System management for doctors, patients, appointments, and departments.">
+    <title>Admin Panel | MediCare+ Medical System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <style>
+        .admin-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .admin-nav-btn:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .admin-nav-btn.active {
+            background: var(--dark-color);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="navbar">
+      <nav class="navbar" aria-label="Main Navigation">
+        <div class="logo">
+          <a href="index.html">MediCare+ Admin Panel</a>
+        </div>
+        <div class="nav-actions">
+          <div id="userMenuDropdown" class="user-dropdown-container">
+            <button id="userBadgeBtn" class="user-badge-btn">
+                <i class="fa-solid fa-user-shield" style="font-size: 1.2rem; color: var(--danger-color);"></i>
+                <span id="navUserName">System Admin</span>
+                <span id="navUserRole" class="role-badge badge-admin">ADMIN</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+            </button>
+            <div id="dropdownMenu" class="dropdown-menu">
+                <a href="index.html"><i class="fa-solid fa-globe"></i> Visit Homepage</a>
+                <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+        <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main class="dashboard-wrapper">
+        <div class="container dashboard-layout">
+
+            <!-- Admin Sidebar Navigation -->
+            <aside class="dashboard-sidebar">
+                <div class="user-profile-summary">
+                    <div class="user-avatar" style="background: #fef2f2; color: var(--danger-color);"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3 style="font-size: 1.1rem; color: var(--dark-color);">System Admin</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">admin@medicare.com</p>
+                    <span class="role-badge badge-admin">SUPER ADMIN</span>
+                </div>
+
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;">
+                    Control Modules
+                </div>
+
+                <nav class="dashboard-nav">
+                    <button class="admin-nav-btn active" data-tab="overview">
+                        <i class="fa-solid fa-chart-line"></i> Dashboard Metrics
+                    </button>
+                    <button class="admin-nav-btn" data-tab="doctors">
+                        <i class="fa-solid fa-user-doctor"></i> Manage Doctors
+                    </button>
+                    <button class="admin-nav-btn" data-tab="patients">
+                        <i class="fa-solid fa-users"></i> View Patients
+                    </button>
+                    <button class="admin-nav-btn" data-tab="appointments">
+                        <i class="fa-solid fa-calendar-check"></i> Appointments
+                    </button>
+                    <button class="admin-nav-btn" data-tab="departments">
+                        <i class="fa-solid fa-hospital"></i> Departments
+                    </button>
+                    <button class="admin-nav-btn" data-tab="messages">
+                        <i class="fa-solid fa-envelope"></i> Contact Messages
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Admin Main Workspace -->
+            <section class="dashboard-main">
+
+                <!-- Module 1: Dashboard Overview -->
+                <div id="admin-tab-overview" class="admin-tab-content">
+                    <div class="stats-cards-grid">
+                        <div class="dash-stat-card stat-total">
+                            <div class="stat-icon-wrapper"><i class="fa-solid fa-users"></i></div>
+                            <div class="stat-info">
+                                <h4 id="admTotalPatients">0</h4>
+                                <p>Total Patients</p>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card stat-upcoming">
+                            <div class="stat-icon-wrapper"><i class="fa-solid fa-user-doctor"></i></div>
+                            <div class="stat-info">
+                                <h4 id="admTotalDoctors">0</h4>
+                                <p>Active Doctors</p>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card stat-completed">
+                            <div class="stat-icon-wrapper"><i class="fa-solid fa-calendar-check"></i></div>
+                            <div class="stat-info">
+                                <h4 id="admTotalAppointments">0</h4>
+                                <p>Total Appointments</p>
+                            </div>
+                        </div>
+                        <div class="dash-stat-card stat-cancelled">
+                            <div class="stat-icon-wrapper" style="background: #ecfdf5; color: var(--success-color);"><i class="fa-solid fa-money-bill-wave"></i></div>
+                            <div class="stat-info">
+                                <h4 id="admTotalRevenue">Rs. 0</h4>
+                                <p>Revenue (Fees)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2: Manage Doctors -->
+                <div id="admin-tab-doctors" class="admin-tab-content hidden">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 style="font-size: 1.15rem; color: var(--dark-color);"><i class="fa-solid fa-user-doctor" style="color: var(--primary-color);"></i> Doctor Directory</h3>
+                            <button class="btn btn-primary btn-sm" onclick="openAddDoctorModal()"><i class="fa-solid fa-user-plus"></i> Add New Doctor</button>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Doctor Name</th>
+                                        <th>Department</th>
+                                        <th>Experience</th>
+                                        <th>Fee</th>
+                                        <th>Rating</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminDoctorsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3: View Patients -->
+                <div id="admin-tab-patients" class="admin-tab-content hidden">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 style="font-size: 1.15rem; color: var(--dark-color);"><i class="fa-solid fa-users" style="color: var(--primary-color);"></i> Registered Patients</h3>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>CNIC</th>
+                                        <th>Registered Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminPatientsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 4: Appointments Override -->
+                <div id="admin-tab-appointments" class="admin-tab-content hidden">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 style="font-size: 1.15rem; color: var(--dark-color);"><i class="fa-solid fa-calendar-check" style="color: var(--primary-color);"></i> All System Appointments</h3>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>APT ID</th>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Department</th>
+                                        <th>Date & Time</th>
+                                        <th>Current Status</th>
+                                        <th>Status Override</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminAppointmentsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5: Departments -->
+                <div id="admin-tab-departments" class="admin-tab-content hidden">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 style="font-size: 1.15rem; color: var(--dark-color);"><i class="fa-solid fa-hospital" style="color: var(--primary-color);"></i> Hospital Departments</h3>
+                            <button class="btn btn-primary btn-sm" onclick="openAddDepartmentModal()"><i class="fa-solid fa-plus"></i> Add Department</button>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Department</th>
+                                        <th>Description</th>
+                                        <th>Specialists Count</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminDepartmentsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6: Contact Form Inquiries -->
+                <div id="admin-tab-messages" class="admin-tab-content hidden">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 style="font-size: 1.15rem; color: var(--dark-color);"><i class="fa-solid fa-envelope" style="color: var(--primary-color);"></i> Visitor Contact Messages</h3>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Sender Name</th>
+                                        <th>Email</th>
+                                        <th>Subject</th>
+                                        <th>Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminMessagesTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Doctor Add/Edit Modal -->
+    <div id="doctorModal" class="modal-backdrop">
+        <div class="modal-card" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="docModalTitle">Add New Doctor</h3>
+                <button class="modal-close" onclick="closeModal('doctorModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="docId">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="form-group">
+                        <label>Doctor Full Name</label>
+                        <input type="text" id="docName" class="form-control" placeholder="Dr. Jane Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select id="docDepartment" class="form-control" required></select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                    <div class="form-group">
+                        <label>Degree / Qualification</label>
+                        <input type="text" id="docDegree" class="form-control" placeholder="MD, FACC" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Experience (Yrs)</label>
+                        <input type="number" id="docExperience" class="form-control" value="5" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fee (Rs)</label>
+                        <input type="number" id="docFee" class="form-control" value="1500" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="url" id="docImage" class="form-control" placeholder="https://images.unsplash.com/...">
+                </div>
+
+                <div class="form-group">
+                    <label>Doctor Overview / Bio</label>
+                    <textarea id="docBio" class="form-control" rows="3" placeholder="Brief biography..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('doctorModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveDoctorFromModal()">Save Doctor</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Department Add Modal -->
+    <div id="deptModal" class="modal-backdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Add Department</h3>
+                <button class="modal-close" onclick="closeModal('deptModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Department Name</label>
+                    <input type="text" id="deptName" class="form-control" placeholder="e.g. Ophthalmology" required>
+                </div>
+                <div class="form-group">
+                    <label>FontAwesome Icon Class</label>
+                    <input type="text" id="deptIcon" class="form-control" value="fa-heart-pulse">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="deptDesc" class="form-control" rows="2" placeholder="Brief department description..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('deptModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveDepartmentFromModal()">Save Department</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-bottom" style="text-align: center;">
+            <p>&copy; 2026 MediCare+ Medical Appointment System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+
+    <!-- Mobile Bottom Navigation Bar (Admin users) -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <div class="mbn-inner">
+            <a href="index.html" class="mbn-tab"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="doctors.html" class="mbn-tab"><i class="fa-solid fa-user-doctor"></i><span>Doctors</span></a>
+            <a href="admin.html" class="mbn-tab mbn-book active"><i class="fa-solid fa-shield-halved"></i><span>Admin</span></a>
+            <a href="appointment.html" class="mbn-tab"><i class="fa-solid fa-calendar"></i><span>Appts</span></a>
+            <a href="contact.html" class="mbn-tab"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </div>
+    </nav>
+</body>
+</html>

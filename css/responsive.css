@@ -1,0 +1,536 @@
+/* ==========================================================================
+   MEDICARE SYSTEM - FULLY RESPONSIVE & MOBILE-OPTIMIZED STYLESHEET
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button,
+.btn,
+a {
+    touch-action: manipulation;
+}
+
+/* 1. Large Screen Adjustments (max-width: 1200px) */
+@media screen and (max-width: 1200px) {
+    .container {
+        padding: 0 24px;
+    }
+    .hero-container {
+        gap: 40px;
+    }
+}
+
+/* 2. Tablets & Small Laptops (max-width: 992px) */
+@media screen and (max-width: 992px) {
+    /* Make header expand if content wraps so dropdown doesn't overlap */
+    .navbar {
+        height: auto !important;
+        min-height: 80px;
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Mobile Dropdown Navigation */
+    .nav-links,
+    .nav-menu {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        z-index: 100;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav-links.active,
+    .nav-menu.active {
+        max-height: 500px;
+        padding: 10px 0 20px 0;
+    }
+
+    .nav-links li,
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-links a,
+    .nav-menu a {
+        display: block;
+        padding: 12px 20px;
+        width: calc(100% - 40px);
+        margin: 5px 20px;
+        border-radius: var(--radius-md);
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-menu a:hover,
+    .nav-links a.active,
+    .nav-menu a.active {
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+        padding-left: 28px;
+    }
+
+    /* Remove the desktop bottom border/underline effect on mobile */
+    .nav-links a::after,
+    .nav-menu a::after {
+        display: none !important;
+    }
+
+    /* Show hamburger toggle */
+    .mobile-toggle {
+        display: flex !important;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--dark-color);
+        cursor: pointer;
+        padding: 5px;
+    }
+
+
+
+    /* Make sure action buttons fit on mobile header */
+    .nav-actions {
+        display: flex !important;
+        gap: 5px;
+    }
+
+    .nav-actions .btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    /* Tweak logo size slightly to give more room */
+    .logo a {
+        font-size: 1.25rem;
+    }
+
+    /* Shrink the hamburger icon slightly to save space */
+    .mobile-toggle {
+        font-size: 1.25rem;
+        padding: 4px;
+        margin-left: 5px;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+    }
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .hero-description {
+        margin: 0 auto 30px auto;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+    .hero-stats {
+        justify-content: center;
+    }
+    .quick-search-form {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .filter-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px;
+    }
+    .dashboard-layout {
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+    }
+    .dashboard-sidebar {
+        width: 100%;
+    }
+    .dashboard-nav {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 8px;
+    }
+    .dash-nav-btn {
+        justify-content: center;
+    }
+    .doctor-profile-grid,
+    #doctorProfileContainer > div > div {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+    #doctorProfileContainer img {
+        height: 280px !important;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    /* Add padding-bottom so content doesn't hide behind bottom nav */
+    body {
+        padding-bottom: 72px;
+    }
+}
+
+/* ========================================================================
+   MOBILE BOTTOM NAVIGATION BAR
+   ======================================================================== */
+
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--white);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.10);
+    z-index: 9999;
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-bottom-nav .mbn-inner {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    height: 64px;
+}
+
+.mobile-bottom-nav .mbn-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 3px;
+    padding: 8px 4px 6px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    font-weight: 600;
+    font-family: var(--font-main, 'Plus Jakarta Sans', sans-serif);
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease, background 0.2s ease;
+    border-radius: 0;
+    position: relative;
+}
+
+.mobile-bottom-nav .mbn-tab i {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mobile-bottom-nav .mbn-tab span {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.mobile-bottom-nav .mbn-tab:hover {
+    color: var(--primary-color);
+}
+
+.mobile-bottom-nav .mbn-tab:hover i {
+    transform: translateY(-2px);
+}
+
+.mobile-bottom-nav .mbn-tab.active {
+    color: var(--primary-color);
+}
+
+.mobile-bottom-nav .mbn-tab.active i {
+    transform: translateY(-2px);
+    color: var(--primary-color);
+}
+
+/* Accent pill indicator for active tab */
+.mobile-bottom-nav .mbn-tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 0 0 4px 4px;
+}
+
+/* Book tab - special CTA styling */
+.mobile-bottom-nav .mbn-tab.mbn-book {
+    color: var(--white);
+    background: var(--primary-color);
+    border-radius: 14px;
+    margin: 8px 6px;
+    flex: 1.1;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.mobile-bottom-nav .mbn-tab.mbn-book::before {
+    display: none;
+}
+
+.mobile-bottom-nav .mbn-tab.mbn-book:hover {
+    background: var(--primary-hover);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.mobile-bottom-nav .mbn-tab.mbn-book.active {
+    background: var(--primary-hover);
+    color: var(--white);
+}
+
+@media screen and (max-width: 992px) {
+    .mobile-bottom-nav {
+        display: block;
+    }
+}
+
+/* 3. Standard Mobile Devices (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    /* Navbar compact */
+    .navbar {
+        padding: 10px 16px;
+    }
+
+    /* Hero & Titles */
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    .hero-main-img {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .floating-card {
+        position: static;
+        margin: 15px auto;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .hero-stats {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .stat-divider {
+        display: none;
+    }
+
+    /* Grids & Form Multi-Columns */
+    .grid-1, .grid-2, .grid-3, .grid-4,
+    .quick-search-form,
+    .filter-grid,
+    .contact-grid,
+    .form-grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* Override inline grid columns on mobile forms */
+    form div[style*="grid-template-columns"],
+    .booking-card div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Stats Cards */
+    .stats-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .dash-stat-card {
+        padding: 14px;
+        gap: 10px;
+    }
+    .stat-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    .stat-info h4 {
+        font-size: 1.2rem;
+    }
+
+    /* Form Layouts */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .booking-card,
+    .auth-card,
+    .form-card,
+    .info-card {
+        padding: 24px 18px !important;
+    }
+
+    .doctor-card {
+        max-width: 360px;
+        margin: auto;
+    }
+    .service-card {
+        padding: 20px;
+    }
+
+    /* Responsive Tables */
+    .table-card {
+        border-radius: var(--radius-md);
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .custom-table {
+        min-width: 600px;
+    }
+    .custom-table th,
+    .custom-table td {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Modals & Toasts */
+    .modal-card {
+        max-width: 95vw !important;
+        margin: 10px;
+    }
+    .modal-body {
+        padding: 16px !important;
+    }
+    .toast-container {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+    }
+    .toast {
+        min-width: unset;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Footer */
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .footer-bottom {
+        padding: 20px 0;
+    }
+}
+
+/* 4. Small Smartphone Screens (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0 14px;
+    }
+    .hero-title {
+        font-size: 1.65rem !important;
+    }
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.88rem;
+    }
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+    .stats-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .slot-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px;
+    }
+    .slot-pill {
+        padding: 8px 4px;
+        font-size: 0.78rem;
+    }
+    .user-badge-btn span#navUserName {
+        display: none;
+    }
+    .dashboard-nav {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Mobile bottom nav slightly smaller */
+    .mobile-bottom-nav .mbn-inner {
+        height: 58px;
+    }
+    .mobile-bottom-nav .mbn-tab i {
+        font-size: 1.1rem;
+    }
+}
+
+/* ==========================================================================
+   FIX FOR "WHY CHOOSE US" SECTION OVERFLOW ON MOBILE
+   ========================================================================== */
+
+/* Tablets (max-width: 992px) */
+@media screen and (max-width: 992px) {
+    /* Stacks the text/cards on top and the hospital image on the bottom */
+    .why-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+}
+
+/* Mobile Phones (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    /* Forces the 6 feature cards into a single vertical column */
+    .why-content {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    /* Reduces the padding and gap inside the cards to prevent side overflow */
+    .feature-card-clean {
+        padding: 16px 20px !important;
+        gap: 12px !important;
+    }
+
+    /* Slightly reduces the icon size to save space */
+    .feature-card-clean .feature-icon-wrapper {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.1rem !important;
+    }
+}

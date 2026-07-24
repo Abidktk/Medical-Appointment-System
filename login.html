@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MediCare+ Login - Access your medical account, view appointments, and manage healthcare online.">
+    <title>Login | MediCare+ Medical System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .auth-wrapper {
+            min-height: calc(100vh - 160px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+        }
+
+        .auth-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header .logo-badge {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .auth-header h2 {
+            font-size: 1.75rem;
+            color: var(--dark-color);
+            margin-bottom: 6px;
+        }
+
+        .auth-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="navbar">
+      <nav class="navbar" aria-label="Main Navigation">
+        <div class="logo">
+          <a href="index.html">MediCare+</a>
+        </div>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="doctors.html">Doctors</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-primary" id="loginBtn">Login</a>
+          <a href="register.html" class="btn btn-outline" id="registerBtn">Register</a>
+        </div>
+        <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-badge"><i class="fa-solid fa-heart-pulse"></i></div>
+                <h2>Welcome Back</h2>
+                <p>Sign in to manage your appointments and profile</p>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="email"><i class="fa-regular fa-envelope"></i> Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="e.g. Email Address" required data-label="Email Address">
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required data-label="Password">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%; margin-top: 10px;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Log In
+                </button>
+            </form>
+
+            <div style="text-align: center; margin-top: 24px; font-size: 0.9rem;">
+                Don't have an account? <a href="register.html" style="font-weight: 600;">Register Now</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-bottom" style="text-align: center;">
+            <p>&copy; 2026 MediCare+ Medical Appointment System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = e.target;
+            if (!FormValidator.validateForm(form)) return;
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            const res = AuthManager.login(email, password);
+            if (res.success) {
+                showToast(`Welcome back, ${res.user.name}!`, 'success');
+                setTimeout(() => {
+                    if (res.user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'dashboard.html';
+                    }
+                }, 800);
+            } else {
+                showToast(res.message, 'error');
+            }
+        });
+    </script>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <div class="mbn-inner">
+            <a href="index.html" class="mbn-tab" id="mbn-home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="about.html" class="mbn-tab" id="mbn-about"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+            <a href="appointment.html" class="mbn-tab mbn-book" id="mbn-book"><i class="fa-solid fa-calendar-plus"></i><span>Book</span></a>
+            <a href="doctors.html" class="mbn-tab" id="mbn-doctors"><i class="fa-solid fa-user-doctor"></i><span>Doctors</span></a>
+            <a href="contact.html" class="mbn-tab" id="mbn-contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </div>
+    </nav>
+</body>
+</html>

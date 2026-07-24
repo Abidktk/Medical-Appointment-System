@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MediCare+ User Dashboard - Manage appointments, view medical history, update profile, and read notifications.">
+    <title>Dashboard | MediCare+ Medical System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="navbar">
+      <nav class="navbar" aria-label="Main Navigation">
+        <div class="logo">
+          <a href="index.html">MediCare+</a>
+        </div>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="doctors.html">Doctors</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-outline" id="loginBtn">Login</a>
+          <a href="register.html" class="btn btn-outline" id="registerBtn">Register</a>
+          <div id="userMenuDropdown" class="user-dropdown-container hidden">
+            <button id="userBadgeBtn" class="user-badge-btn">
+                <i class="fa-solid fa-circle-user" style="font-size: 1.2rem; color: var(--primary-color);"></i>
+                <span id="navUserName">User</span>
+                <span id="navUserRole" class="role-badge">PATIENT</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+            </button>
+            <div id="dropdownMenu" class="dropdown-menu">
+                <a href="dashboard.html" id="dashboardNavLink"><i class="fa-solid fa-gauge"></i> My Dashboard</a>
+                <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+        <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main class="dashboard-wrapper">
+        <div class="container dashboard-layout">
+
+            <!-- Sidebar Navigation -->
+            <aside class="dashboard-sidebar">
+                <div class="user-profile-summary">
+                    <div class="user-avatar"><i class="fa-solid fa-user-gear"></i></div>
+                    <h3 id="dashUserName" style="font-size: 1.1rem; color: var(--dark-color);">Loading...</h3>
+                    <p id="dashUserEmail" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">user@domain.com</p>
+                    <span id="dashUserRoleBadge" class="role-badge badge-patient">PATIENT</span>
+                </div>
+
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;" id="navTitleHeading">
+                    User Menu
+                </div>
+
+                <nav class="dashboard-nav">
+                    <button class="dash-nav-btn active" data-tab="appointments">
+                        <i class="fa-solid fa-calendar-check"></i> Appointments
+                    </button>
+                    <button class="dash-nav-btn hidden" id="docScheduleTabBtn" data-tab="doctor-schedule">
+                        <i class="fa-solid fa-user-gear"></i> Doctor Schedule & Fee
+                    </button>
+                    <button class="dash-nav-btn" data-tab="notifications">
+                        <i class="fa-solid fa-bell"></i> Notifications
+                        <span id="notifCountBadge" class="nav-badge">0</span>
+                    </button>
+                    <button class="dash-nav-btn" data-tab="profile">
+                        <i class="fa-solid fa-user-pen"></i> Edit Profile
+                    </button>
+                    <a href="appointment.html" class="dash-nav-btn" id="newAppointmentNavLink" style="color: var(--primary-color);">
+                        <i class="fa-solid fa-plus-circle"></i> New Appointment
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Tab Container -->
+            <section class="dashboard-main">
+
+                <!-- Stats Overview Row -->
+                <div class="stats-cards-grid">
+                    <div class="dash-stat-card stat-total">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-calendar-days"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statTotalCount">0</h4>
+                            <p>Total Booked</p>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card stat-upcoming">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-clock"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statUpcomingCount">0</h4>
+                            <p>Upcoming</p>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card stat-completed">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statCompletedCount">0</h4>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card stat-cancelled">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-circle-xmark"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statCancelledCount">0</h4>
+                            <p>Cancelled</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 1: Appointments List Table -->
+                <div id="tab-appointments" class="tab-content-section">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 style="font-size: 1.15rem; color: var(--dark-color);"><i class="fa-solid fa-list-check" style="color: var(--primary-color);"></i> Appointment History & Status</h3>
+                            <a href="appointment.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Book New</a>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Doctor / Patient</th>
+                                        <th>Department</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appointmentsTableBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Notifications -->
+                <div id="tab-notifications" class="tab-content-section hidden">
+                    <div class="table-card" style="padding: 24px;">
+                        <h3 style="font-size: 1.15rem; color: var(--dark-color); margin-bottom: 20px;">
+                            <i class="fa-solid fa-bell" style="color: var(--primary-color);"></i> Recent Notifications
+                        </h3>
+                        <div id="notificationsList" style="display: flex; flex-direction: column; gap: 12px;">
+                            <!-- Dynamic Notifications -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Edit Profile -->
+                <div id="tab-profile" class="tab-content-section hidden">
+                    <div class="table-card" style="padding: 30px;">
+                        <h3 style="font-size: 1.15rem; color: var(--dark-color); margin-bottom: 20px;">
+                            <i class="fa-solid fa-user-pen" style="color: var(--primary-color);"></i> Account & Personal Profile
+                        </h3>
+                        <form id="profileForm">
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="profName">Full Name</label>
+                                    <input type="text" id="profName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profEmail">Email Address (Read Only)</label>
+                                    <input type="email" id="profEmail" class="form-control" readonly style="background: var(--light-bg);">
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="profPhone">Phone Number</label>
+                                    <input type="tel" id="profPhone" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profCNIC">CNIC</label>
+                                    <input type="text" id="profCNIC" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profPassword">New Password (Leave blank to keep unchanged)</label>
+                                <input type="password" id="profPassword" class="form-control" placeholder="••••••••">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+                                <i class="fa-solid fa-floppy-disk"></i> Save Profile Changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Doctor Schedule & Fee Settings (Doctor Only) -->
+                <div id="tab-doctor-schedule" class="tab-content-section hidden">
+                    <div class="table-card" style="padding: 30px;">
+                        <h3 style="font-size: 1.15rem; color: var(--dark-color); margin-bottom: 20px;">
+                            <i class="fa-solid fa-clock" style="color: var(--primary-color);"></i> Doctor Consultation Schedule & Fee Settings
+                        </h3>
+                        <form id="doctorScheduleForm">
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="docSettingFee">Consultation Fee (Rs.)</label>
+                                    <input type="number" id="docSettingFee" class="form-control" min="500" step="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="docSettingTiming">Consultation Hours / Timing</label>
+                                    <input type="text" id="docSettingTiming" class="form-control" placeholder="09:00 AM - 02:00 PM">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="docSettingBio">Doctor Biography / Medical Specialization</label>
+                                <textarea id="docSettingBio" class="form-control" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+                                <i class="fa-solid fa-floppy-disk"></i> Update Doctor Schedule
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Patient Details Modal (For Doctors) -->
+    <div id="patientDetailsModal" class="modal-backdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-id-card" style="color: var(--primary-color);"></i> Patient & Booking Details</h3>
+                <button class="modal-close" onclick="closeModal('patientDetailsModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="patientDetailsModalBody">
+                <!-- Injected via JS -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal('patientDetailsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal-backdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Submit Doctor Review</h3>
+                <button class="modal-close" onclick="closeModal('reviewModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="reviewDoctorId">
+                <p style="margin-bottom: 12px; color: var(--text-main);">Share your consultation experience with <strong id="reviewDoctorNameText">Doctor</strong>:</p>
+
+                <div class="form-group">
+                    <label>Select Rating</label>
+                    <div id="starRatingContainer" class="rating-stars">
+                        <span class="star active" onclick="setRating(1)">★</span>
+                        <span class="star active" onclick="setRating(2)">★</span>
+                        <span class="star active" onclick="setRating(3)">★</span>
+                        <span class="star active" onclick="setRating(4)">★</span>
+                        <span class="star active" onclick="setRating(5)">★</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewText">Your Review Comment</label>
+                    <textarea id="reviewText" class="form-control" rows="4" placeholder="Write your review here..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal('reviewModal')">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="submitReview()">Submit Review</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-bottom" style="text-align: center;">
+            <p>&copy; 2026 MediCare+ Medical Appointment System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <!-- Mobile Bottom Navigation Bar (Dashboard users: Home, Book, My Dashboard, Doctors, Logout) -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <div class="mbn-inner">
+            <a href="index.html" class="mbn-tab" id="mbn-home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="doctors.html" class="mbn-tab" id="mbn-doctors"><i class="fa-solid fa-user-doctor"></i><span>Doctors</span></a>
+            <a href="appointment.html" class="mbn-tab mbn-book" id="mbn-book"><i class="fa-solid fa-calendar-plus"></i><span>Book</span></a>
+            <a href="dashboard.html" class="mbn-tab active" id="mbn-dash"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+            <a href="contact.html" class="mbn-tab" id="mbn-contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </div>
+    </nav>
+</body>
+</html>
