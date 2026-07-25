@@ -166,16 +166,20 @@ a {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px;
     }
+    .dashboard-wrapper {
+        overflow-x: hidden;
+    }
     .dashboard-layout {
         grid-template-columns: 1fr !important;
         gap: 24px;
+        max-width: 100vw;
     }
     .dashboard-sidebar {
         width: 100%;
     }
     .dashboard-nav {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        display: flex;
+        flex-direction: column;
         gap: 8px;
     }
     .dash-nav-btn {
@@ -380,6 +384,7 @@ a {
     .dash-stat-card {
         padding: 14px;
         gap: 10px;
+        min-width: 0;
     }
     .stat-icon-wrapper {
         width: 40px;
@@ -415,6 +420,12 @@ a {
         width: 100%;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+    }
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px;
     }
     .custom-table {
         min-width: 600px;

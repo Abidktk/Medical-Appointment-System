@@ -12,6 +12,7 @@
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 24px;
+    max-width: 100%;
 }
 
 @media (max-width: 992px) {
@@ -29,6 +30,8 @@
     position: sticky;
     top: 20px;
     align-self: start;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .user-profile-summary {
@@ -73,6 +76,8 @@
     text-align: left;
     width: 100%;
     transition: var(--transition);
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .dash-nav-btn:hover {
