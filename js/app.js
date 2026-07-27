@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initMobileNav();
     initStickyHeader();
+    initThemeToggle();
     setMinimumBookingDate();
     initStatCounters();
     createToastContainer();
@@ -109,6 +110,84 @@ function initMobileNav() {
             }
         });
     }
+}
+
+function getPreferredTheme() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(theme, button = document.getElementById('themeToggle')) {
+    const normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', normalizedTheme);
+
+    try {
+        localStorage.setItem('theme', normalizedTheme);
+    } catch (error) {
+        console.warn('Theme preference could not be saved:', error);
+    }
+
+    if (button) {
+        const icon = button.querySelector('.theme-toggle-icon');
+        const label = button.querySelector('.theme-toggle-label');
+
+        if (icon) {
+            icon.className = normalizedTheme === 'dark'
+                ? 'fa-solid fa-sun theme-toggle-icon'
+                : 'fa-solid fa-moon theme-toggle-icon';
+        }
+
+        if (label) {
+            label.textContent = normalizedTheme === 'dark' ? 'Light' : 'Dark';
+        }
+
+        button.setAttribute('aria-pressed', normalizedTheme === 'dark' ? 'true' : 'false');
+    }
+}
+
+function initThemeToggle() {
+    const existingToggle = document.getElementById('themeToggle');
+    if (existingToggle) {
+        existingToggle.addEventListener('click', () => {
+            const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme, existingToggle);
+        });
+
+        let savedTheme = 'light';
+        try {
+            savedTheme = localStorage.getItem('theme') || getPreferredTheme();
+        } catch (error) {
+            savedTheme = getPreferredTheme();
+        }
+
+        applyTheme(savedTheme, existingToggle);
+        return;
+    }
+
+    const navActions = document.querySelector('.nav-actions');
+    if (!navActions) return;
+
+    const button = document.createElement('button');
+    button.id = 'themeToggle';
+    button.className = 'theme-toggle';
+    button.type = 'button';
+    button.setAttribute('aria-label', 'Toggle dark and light mode');
+    button.innerHTML = '<i class="fa-solid fa-moon theme-toggle-icon" aria-hidden="true"></i><span class="theme-toggle-label">Dark</span>';
+
+    button.addEventListener('click', () => {
+        const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme, button);
+    });
+
+    navActions.insertBefore(button, navActions.firstChild);
+
+    let savedTheme = 'light';
+    try {
+        savedTheme = localStorage.getItem('theme') || getPreferredTheme();
+    } catch (error) {
+        savedTheme = getPreferredTheme();
+    }
+
+    applyTheme(savedTheme, button);
 }
 
 // Sticky Header Box Shadow on Scroll
